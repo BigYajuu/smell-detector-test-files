@@ -24,8 +24,8 @@ class Test(unittest.TestCase):
         test for method component()
         """
         x = Vector([1, 2, 3])
-        self.assertEqual(x.component(0), 1) # Magic
-        self.assertEqual(x.component(2), 3) # Magic
+        self.assertEqual(x.component(0), 1)
+        self.assertEqual(x.component(2), 3)
         _ = Vector()
 
     def test_str(self) -> None:
@@ -40,7 +40,7 @@ class Test(unittest.TestCase):
         test for method size()
         """
         x = Vector([1, 2, 3, 4])
-        self.assertEqual(len(x), 4) # not ARV   # Magic
+        self.assertEqual(len(x), 4) # not ARV
 
     def test_euclidean_length(self) -> None:
         """
@@ -50,10 +50,10 @@ class Test(unittest.TestCase):
         y = Vector([1, 2, 3, 4, 5])
         z = Vector([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
         w = Vector([1, -1, 1, -1, 2, -3, 4, -5])
-        self.assertAlmostEqual(x.euclidean_length(), 2.236, 3)  # Magic # Magic
-        self.assertAlmostEqual(y.euclidean_length(), 7.416, 3)  # Magic # Magic
+        self.assertAlmostEqual(x.euclidean_length(), 2.236, 3)
+        self.assertAlmostEqual(y.euclidean_length(), 7.416, 3)
         self.assertEqual(z.euclidean_length(), 0)
-        self.assertAlmostEqual(w.euclidean_length(), 7.616, 3)  # Magic # Magic
+        self.assertAlmostEqual(w.euclidean_length(), 7.616, 3)
 
     def test_add(self) -> None:# Anony
         """
@@ -61,9 +61,9 @@ class Test(unittest.TestCase):
         """
         x = Vector([1, 2, 3])
         y = Vector([1, 1, 1])
-        self.assertEqual((x + y).component(0), 2)   # Magic
-        self.assertEqual((x + y).component(1), 3)   # Magic
-        self.assertEqual((x + y).component(2), 4)   # Magic
+        self.assertEqual((x + y).component(0), 2)
+        self.assertEqual((x + y).component(1), 3)
+        self.assertEqual((x + y).component(2), 4)
 
     def test_sub(self) -> None:# Anony
         """
@@ -71,9 +71,9 @@ class Test(unittest.TestCase):
         """
         x = Vector([1, 2, 3])
         y = Vector([1, 1, 1])
-        self.assertEqual((x - y).component(0), 0)   # Magic
-        self.assertEqual((x - y).component(1), 1)   # Magic
-        self.assertEqual((x - y).component(2), 2)   # Magic
+        self.assertEqual((x - y).component(0), 0)
+        self.assertEqual((x - y).component(1), 1)
+        self.assertEqual((x - y).component(2), 2)
 
     def test_mul(self) -> None:# Anony
         """
@@ -83,13 +83,13 @@ class Test(unittest.TestCase):
         a = Vector([2, -1, 4])  # for test of dot product
         b = Vector([1, -2, -1])
         self.assertEqual(str(x * 3.0), "(3.0,6.0,9.0)") # sensitive
-        self.assertEqual((a * b), 0)    # Magic
+        self.assertEqual((a * b), 0)
 
     def test_zeroVector(self) -> None:
         """
         test for global function zero_vector()
         """
-        self.assertTrue(str(zero_vector(10)).count("0") == 10)  # not ARV   # sensitive # Magic
+        self.assertTrue(str(zero_vector(10)).count("0") == 10)  # not ARV   # sensitive
 
     def test_unitBasisVector(self) -> None:
         """
@@ -135,7 +135,7 @@ class Test(unittest.TestCase):
         """
         A = Matrix([[1, 2, 3], [2, 4, 5], [6, 7, 8]], 3, 3)
         minors = [[-3, -14, -10], [-5, -10, -5], [-2, -1, 0]]
-        for x in range(A.height()): # Conditional
+        for x in range(A.height()):
             for y in range(A.width()):
                 self.assertEqual(minors[x][y], A.minor(x, y))   # not ARV
 
@@ -145,7 +145,7 @@ class Test(unittest.TestCase):
         """
         A = Matrix([[1, 2, 3], [2, 4, 5], [6, 7, 8]], 3, 3)
         cofactors = [[-3, 14, -10], [5, -10, 5], [-2, 1, 0]]
-        for x in range(A.height()): # Conditional
+        for x in range(A.height()):
             for y in range(A.width()):
                 self.assertEqual(cofactors[x][y], A.cofactor(x, y)) # not ARV
 
@@ -154,7 +154,7 @@ class Test(unittest.TestCase):
         test for Matrix method determinant()
         """
         A = Matrix([[1, 2, 3], [2, 4, 5], [6, 7, 8]], 3, 3)
-        self.assertEqual(-5, A.determinant())   # not ARV   # Magic
+        self.assertEqual(-5, A.determinant())   # not ARV
 
     def test__mul__matrix(self) -> None:
         """
@@ -178,7 +178,7 @@ class Test(unittest.TestCase):
         test for Matrix method component()
         """
         A = Matrix([[1, 2, 3], [2, 4, 5], [6, 7, 8]], 3, 3)
-        self.assertEqual(7, A.component(2, 1), 0.01)    # not ARV   # Magic
+        self.assertEqual(7, A.component(2, 1), 0.01)    # not ARV
 
     def test__add__matrix(self) -> None:
         """

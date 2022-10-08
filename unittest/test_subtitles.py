@@ -81,10 +81,10 @@ class TestYoutubeSubtitles(BaseTestSubtitles):
         self.DL.params['writesubtitles'] = True
         self.DL.params['allsubtitles'] = True
         subtitles = self.getSubtitles()
-        self.assertEqual(len(subtitles.keys()), 13) # Magic
+        self.assertEqual(len(subtitles.keys()), 13)
         self.assertEqual(md5(subtitles['en']), 'ae1bd34126571a77aabd4d276b28044d')
         self.assertEqual(md5(subtitles['it']), '0e0b667ba68411d88fd1c5f4f4eab2f9')
-        for lang in ['fr', 'de']:   # Conditional
+        for lang in ['fr', 'de']:
             self.assertTrue(subtitles.get(lang) is not None, 'Subtitles for \'%s\' not extracted' % lang)
 
     def _test_subtitles_format(self, fmt, md5_hash, lang='en'): # Anony
@@ -150,10 +150,10 @@ class TestDailymotionSubtitles(BaseTestSubtitles):
         self.DL.params['writesubtitles'] = True
         self.DL.params['allsubtitles'] = True
         subtitles = self.getSubtitles()
-        self.assertTrue(len(subtitles.keys()) >= 6) # Magic
+        self.assertTrue(len(subtitles.keys()) >= 6)
         self.assertEqual(md5(subtitles['en']), '976553874490cba125086bbfea3ff76f')
         self.assertEqual(md5(subtitles['fr']), '594564ec7d588942e384e920e5341792')
-        for lang in ['es', 'fr', 'de']: # Conditional
+        for lang in ['es', 'fr', 'de']:
             self.assertTrue(subtitles.get(lang) is not None, 'Subtitles for \'%s\' not extracted' % lang)  # not ARV
 
     def test_nosubtitles(self): # Anony
@@ -174,10 +174,10 @@ class TestTedSubtitles(BaseTestSubtitles):
         self.DL.params['writesubtitles'] = True
         self.DL.params['allsubtitles'] = True
         subtitles = self.getSubtitles()
-        self.assertTrue(len(subtitles.keys()) >= 28)    # Magic
+        self.assertTrue(len(subtitles.keys()) >= 28)
         self.assertEqual(md5(subtitles['en']), '4262c1665ff928a2dada178f62cb8d14')
         self.assertEqual(md5(subtitles['fr']), '66a63f7f42c97a50f8c0e90bc7797bb5')
-        for lang in ['es', 'fr', 'de']: # Conditional
+        for lang in ['es', 'fr', 'de']:
             self.assertTrue(subtitles.get(lang) is not None, 'Subtitles for \'%s\' not extracted' % lang)   # not ARV
 
 
@@ -235,7 +235,7 @@ class TestCeskaTelevizeSubtitles(BaseTestSubtitles):
         self.DL.params['allsubtitles'] = True
         subtitles = self.getSubtitles()
         self.assertEqual(set(subtitles.keys()), set(['cs']))
-        self.assertTrue(len(subtitles['cs']) > 20000)   # Magic
+        self.assertTrue(len(subtitles['cs']) > 20000)
 
     def test_nosubtitles(self): # Anony
         self.DL.expect_warning('video doesn\'t have subtitles')
@@ -365,7 +365,7 @@ class TestRtveSubtitles(BaseTestSubtitles):
     IE = RTVEALaCartaIE
 
     def test_allsubtitles(self):    # Anony
-        print('Skipping, only available from Spain')    # RedundPrint
+        print('Skipping, only available from Spain')
         return
         self.DL.params['writesubtitles'] = True
         self.DL.params['allsubtitles'] = True

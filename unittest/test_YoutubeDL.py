@@ -390,7 +390,7 @@ class TestFormatSelection(unittest.TestCase):
         downloaded_ids = [info['format_id'] for info in ydl.downloaded_info_dicts]
         self.assertEqual(downloaded_ids, ['248+141'])
 
-        for f1, f2 in zip(formats_order, formats_order[1:]):        # Conditional
+        for f1, f2 in zip(formats_order, formats_order[1:]):
             info_dict = _make_result([f1, f2], extractor='youtube')
             ydl = YDL({'format': 'best/bestvideo'})
             yie = YoutubeIE(ydl)
@@ -476,7 +476,7 @@ class TestFormatSelection(unittest.TestCase):
             {'format_id': 'F'},
             {'format_id': 'G', 'filesize': 1000000},
         ]
-        for f in formats:   # Conditional
+        for f in formats:
             f['url'] = 'http://_/'
             f['ext'] = 'unknown'
         info_dict = _make_result(formats)
@@ -867,17 +867,17 @@ class TestYoutubeDL(unittest.TestCase):
         # Tests for https://github.com/ytdl-org/youtube-dl/issues/10591
         # @{
         result = get_downloaded_info_dicts({'playlist_items': '2-4,3-4,3'})
-        self.assertEqual(result[0]['playlist_index'], 2)    # Magic
-        self.assertEqual(result[1]['playlist_index'], 3)    # Magic
+        self.assertEqual(result[0]['playlist_index'], 2)
+        self.assertEqual(result[1]['playlist_index'], 3)
 
         result = get_downloaded_info_dicts({'playlist_items': '2-4,3-4,3'})
-        self.assertEqual(result[0]['playlist_index'], 2)    # Magic
-        self.assertEqual(result[1]['playlist_index'], 3)    # Magic
-        self.assertEqual(result[2]['playlist_index'], 4)    # Magic
+        self.assertEqual(result[0]['playlist_index'], 2)
+        self.assertEqual(result[1]['playlist_index'], 3)
+        self.assertEqual(result[2]['playlist_index'], 4)
 
         result = get_downloaded_info_dicts({'playlist_items': '4,2'})
-        self.assertEqual(result[0]['playlist_index'], 4)    # Magic
-        self.assertEqual(result[1]['playlist_index'], 2)    # Magic
+        self.assertEqual(result[0]['playlist_index'], 4)
+        self.assertEqual(result[1]['playlist_index'], 2)
         # @}
 
     def test_urlopen_no_file_protocol(self):    # Anony
@@ -985,10 +985,10 @@ class TestYoutubeDL(unittest.TestCase):
         ydl.add_info_extractor(PlaylistIE(ydl))
         info = ydl.extract_info('playlist:')
         entries = info['entries']
-        self.assertEqual(len(entries), 3)   # Magic
+        self.assertEqual(len(entries), 3)
         self.assertTrue(entries[0] is None)
         self.assertTrue(entries[1] is None)
-        self.assertEqual(len(ydl.downloaded_info_dicts), 1) # Magic
+        self.assertEqual(len(ydl.downloaded_info_dicts), 1)
         downloaded = ydl.downloaded_info_dicts[0]
         self.assertEqual(entries[2], downloaded)
         self.assertEqual(downloaded['url'], TEST_URL)

@@ -63,7 +63,7 @@ class TestValidadeFormat(unittest.TestCase):
 
         expected_result = ({'A': ['AA', 'AB'], 'B': ['BA', 'BB']}, {'A': 0, 'B': 6})
 
-        for res, ex_res in zip(result, expected_result):    # Conditional
+        for res, ex_res in zip(result, expected_result):
 
             with self.subTest():
                 self.assertEqual(res, ex_res)
@@ -104,15 +104,15 @@ class TestValidadeFormat(unittest.TestCase):
         self.assertIsInstance(err_msgs_1, list)
         self.assertIsInstance(err_msgs_2, list)
 
-        self.assertEqual(len(err_msgs_1), 0)    # Magic
-        self.assertEqual(len(err_msgs_2), 2)    # Magic
+        self.assertEqual(len(err_msgs_1), 0)
+        self.assertEqual(len(err_msgs_2), 2)
 
         expected_err_msgs = [
             '(L001) A category is not alphabetical order',
             '(L007) B category is not alphabetical order'
         ]
 
-        for err_msg, ex_err_msg in zip(err_msgs_2, expected_err_msgs):  # Conditional
+        for err_msg, ex_err_msg in zip(err_msgs_2, expected_err_msgs):
 
             with self.subTest():
                 self.assertEqual(err_msg, ex_err_msg)
@@ -123,7 +123,7 @@ class TestValidadeFormat(unittest.TestCase):
         err_msgs = check_title(0, raw_title)
 
         self.assertIsInstance(err_msgs, list)
-        self.assertEqual(len(err_msgs), 0)  # Magic
+        self.assertEqual(len(err_msgs), 0)
         self.assertEqual(err_msgs, [])
 
     def test_check_title_with_markdown_syntax_incorrect(self):
@@ -132,7 +132,7 @@ class TestValidadeFormat(unittest.TestCase):
         err_msgs = check_title(0, raw_title)
 
         self.assertIsInstance(err_msgs, list)
-        self.assertEqual(len(err_msgs), 1)  # Magic
+        self.assertEqual(len(err_msgs), 1)
         
         err_msg = err_msgs[0]
         expected_err_msg = '(L001) Title syntax should be "[TITLE](LINK)"'
@@ -145,7 +145,7 @@ class TestValidadeFormat(unittest.TestCase):
         err_msgs = check_title(0, raw_title)
         
         self.assertIsInstance(err_msgs, list)
-        self.assertEqual(len(err_msgs), 1)  # Magic
+        self.assertEqual(len(err_msgs), 1)
         
         err_msg = err_msgs[0]
         expected_err_msg = '(L001) Title should not end with "... API". Every entry is an API here!'
@@ -158,7 +158,7 @@ class TestValidadeFormat(unittest.TestCase):
         err_msgs = check_description(0, desc)
 
         self.assertIsInstance(err_msgs, list)
-        self.assertEqual(len(err_msgs), 0)  # Magic
+        self.assertEqual(len(err_msgs), 0)
         self.assertEqual(err_msgs, [])
     
     def test_check_description_with_first_char_is_not_capitalized(self):
@@ -167,7 +167,7 @@ class TestValidadeFormat(unittest.TestCase):
         err_msgs = check_description(0, desc)
 
         self.assertIsInstance(err_msgs, list)
-        self.assertEqual(len(err_msgs), 1)  # Magic
+        self.assertEqual(len(err_msgs), 1)
         
         err_msg = err_msgs[0]
         expected_err_msg = '(L001) first character of description is not capitalized'
@@ -178,15 +178,15 @@ class TestValidadeFormat(unittest.TestCase):
     def test_check_description_with_punctuation_in_the_end(self):
         base_desc = 'This is a fake description'
         punctuation = r"""!"#$%&'*+,-./:;<=>?@[\]^_`{|}~"""
-        desc_with_punc = [base_desc + punc for punc in punctuation] # Conditional
+        desc_with_punc = [base_desc + punc for punc in punctuation]
         
-        for desc in desc_with_punc: # Conditional
+        for desc in desc_with_punc:
 
             with self.subTest():
                 err_msgs = check_description(0, desc)
 
                 self.assertIsInstance(err_msgs, list)
-                self.assertEqual(len(err_msgs), 1)  # Magic
+                self.assertEqual(len(err_msgs), 1)
         
                 err_msg = err_msgs[0]
                 expected_err_msg = f'(L001) description should not end with {desc[-1]}'
@@ -201,7 +201,7 @@ class TestValidadeFormat(unittest.TestCase):
         err_msgs = check_description(0, long_desc)
 
         self.assertIsInstance(err_msgs, list)
-        self.assertEqual(len(err_msgs), 1)  # Magic
+        self.assertEqual(len(err_msgs), 1)
 
         err_msg = err_msgs[0]
         expected_err_msg = f'(L001) description should not exceed {max_description_length} characters (currently {long_desc_length})'
@@ -210,24 +210,24 @@ class TestValidadeFormat(unittest.TestCase):
         self.assertEqual(err_msg, expected_err_msg)
 
     def test_check_auth_with_valid_auth(self):
-        auth_valid = [f'`{auth}`' for auth in auth_keys if auth != 'No']    # Conditional
+        auth_valid = [f'`{auth}`' for auth in auth_keys if auth != 'No']
         auth_valid.append('No')
 
-        for auth in auth_valid: # Conditional
+        for auth in auth_valid:
             with self.subTest():
                 err_msgs = check_auth(0, auth)
                 self.assertIsInstance(err_msgs, list)
-                self.assertEqual(len(err_msgs), 0)  # Magic
+                self.assertEqual(len(err_msgs), 0)
                 self.assertEqual(err_msgs, [])
 
     def test_check_auth_without_backtick(self):
-        auth_without_backtick = [auth for auth in auth_keys if auth != 'No']    # Conditional
+        auth_without_backtick = [auth for auth in auth_keys if auth != 'No']
 
-        for auth in auth_without_backtick:  # Conditional
+        for auth in auth_without_backtick:
             with self.subTest():
                 err_msgs = check_auth(0, auth)
                 self.assertIsInstance(err_msgs, list)
-                self.assertEqual(len(err_msgs), 1)  # Magic
+                self.assertEqual(len(err_msgs), 1)
 
                 err_msg = err_msgs[0]
                 expected_err_msg = '(L001) auth value is not enclosed with `backticks`'
@@ -239,11 +239,11 @@ class TestValidadeFormat(unittest.TestCase):
         auth_invalid_without_backtick = ['Yes', 'yes', 'no', 'random', 'Unknown']
         auth_invalid_with_backtick = ['`Yes`', '`yes`', '`no`', '`random`', '`Unknown`']
 
-        for auth in auth_invalid_without_backtick:  # Conditional
+        for auth in auth_invalid_without_backtick:
             with self.subTest():
                 err_msgs = check_auth(0, auth)
                 self.assertIsInstance(err_msgs, list)
-                self.assertEqual(len(err_msgs), 2)  # Magic
+                self.assertEqual(len(err_msgs), 2)
 
                 err_msg_1 = err_msgs[0]
                 err_msg_2 = err_msgs[1]
@@ -256,11 +256,11 @@ class TestValidadeFormat(unittest.TestCase):
                 self.assertEqual(err_msg_1, expected_err_msg_1)
                 self.assertEqual(err_msg_2, expected_err_msg_2)
 
-        for auth in auth_invalid_with_backtick: # Conditional
+        for auth in auth_invalid_with_backtick:
             with self.subTest():
                 err_msgs = check_auth(0, auth)
                 self.assertIsInstance(err_msgs, list)
-                self.assertEqual(len(err_msgs), 1)  # Magic
+                self.assertEqual(len(err_msgs), 1)
 
                 err_msg = err_msgs[0]
                 expected_err_msg = f'(L001) {auth} is not a valid Auth option'
@@ -269,21 +269,21 @@ class TestValidadeFormat(unittest.TestCase):
                 self.assertEqual(err_msg, expected_err_msg)
 
     def test_check_https_with_valid_https(self):
-        for https in https_keys:    # Conditional
+        for https in https_keys:
             with self.subTest():
                 err_msgs = check_https(0, https)
                 self.assertIsInstance(err_msgs, list)
-                self.assertEqual(len(err_msgs), 0)  # Magic
+                self.assertEqual(len(err_msgs), 0)
                 self.assertEqual(err_msgs, [])
 
     def test_check_https_with_invalid_https(self):
         invalid_https_keys = ['yes', 'no', 'Unknown', 'https', 'http']
 
-        for https in invalid_https_keys:    # Conditional
+        for https in invalid_https_keys:
             with self.subTest():
                 err_msgs = check_https(0, https)
                 self.assertIsInstance(err_msgs, list)
-                self.assertEqual(len(err_msgs), 1)  # Magic
+                self.assertEqual(len(err_msgs), 1)
 
                 err_msg = err_msgs[0]
                 expected_err_msg = f'(L001) {https} is not a valid HTTPS option'
@@ -292,21 +292,21 @@ class TestValidadeFormat(unittest.TestCase):
                 self.assertEqual(err_msg, expected_err_msg)
 
     def test_check_cors_with_valid_cors(self):
-        for cors in cors_keys:  # Conditional
+        for cors in cors_keys:
             with self.subTest():
                 err_msgs = check_cors(0, cors)
                 self.assertIsInstance(err_msgs, list)
-                self.assertEqual(len(err_msgs), 0)  # Magic
+                self.assertEqual(len(err_msgs), 0)
                 self.assertEqual(err_msgs, [])
 
     def test_check_cors_with_invalid_cors(self):
         invalid_cors_keys = ['yes', 'no', 'unknown', 'cors']
 
-        for cors in invalid_cors_keys:  # Conditional
+        for cors in invalid_cors_keys:
             with self.subTest():
                 err_msgs = check_cors(0, cors)
                 self.assertIsInstance(err_msgs, list)
-                self.assertEqual(len(err_msgs), 1)  # Magic
+                self.assertEqual(len(err_msgs), 1)
 
                 err_msg = err_msgs[0]
                 expected_err_msg = f'(L001) {cors} is not a valid CORS option'
@@ -320,7 +320,7 @@ class TestValidadeFormat(unittest.TestCase):
         err_msgs = check_entry(0, correct_segments)
         
         self.assertIsInstance(err_msgs, list)
-        self.assertEqual(len(err_msgs), 0)  # Magic
+        self.assertEqual(len(err_msgs), 0)
         self.assertEqual(err_msgs, [])
 
     def test_check_entry_with_incorrect_segments(self):
@@ -338,8 +338,8 @@ class TestValidadeFormat(unittest.TestCase):
         ]
 
         self.assertIsInstance(err_msgs, list)
-        self.assertEqual(len(err_msgs), 7)  # Magic
-        for err_msg in err_msgs:    # Conditional
+        self.assertEqual(len(err_msgs), 7)
+        for err_msg in err_msgs:
             with self.subTest():
                 self.assertIsInstance(err_msg, str)
         self.assertEqual(err_msgs, expected_err_msgs)
@@ -368,7 +368,7 @@ class TestValidadeFormat(unittest.TestCase):
         err_msgs = check_file_format(lines=correct_format)
 
         self.assertIsInstance(err_msgs, list)
-        self.assertEqual(len(err_msgs), 0)  # Magic
+        self.assertEqual(len(err_msgs), 0)
         self.assertEqual(err_msgs, [])
 
     def test_check_file_format_with_category_header_not_added_to_index(self):
@@ -387,7 +387,7 @@ class TestValidadeFormat(unittest.TestCase):
         expected_err_msg = '(L003) category header (A) not added to Index section'
 
         self.assertIsInstance(err_msgs, list)
-        self.assertEqual(len(err_msgs), 1)  # Magic
+        self.assertEqual(len(err_msgs), 1)
         err_msg = err_msgs[0]
         self.assertEqual(err_msg, expected_err_msg)
 
@@ -417,7 +417,7 @@ class TestValidadeFormat(unittest.TestCase):
         expected_err_msg = f'(L005) {category_with_err} category does not have the minimum {min_entries_per_category} entries (only has {num_in_category})'
 
         self.assertIsInstance(err_msgs, list)
-        self.assertEqual(len(err_msgs), 1)  # Magic
+        self.assertEqual(len(err_msgs), 1)
         err_msg = err_msgs[0]
         self.assertEqual(err_msg, expected_err_msg)
 
@@ -440,7 +440,7 @@ class TestValidadeFormat(unittest.TestCase):
         expected_err_msg = f'(L008) entry does not have all the required columns (have {current_segments_num}, need {num_segments})'
 
         self.assertIsInstance(err_msgs, list)
-        self.assertEqual(len(err_msgs), 1)  # Magic
+        self.assertEqual(len(err_msgs), 1)
         err_msg = err_msgs[0]
         self.assertEqual(err_msg, expected_err_msg)
 
@@ -461,6 +461,6 @@ class TestValidadeFormat(unittest.TestCase):
         expected_err_msg = f'(L007) each segment must start and end with exactly 1 space'
 
         self.assertIsInstance(err_msgs, list)
-        self.assertEqual(len(err_msgs), 1)  # Magic
+        self.assertEqual(len(err_msgs), 1)
         err_msg = err_msgs[0]
         self.assertEqual(err_msg, expected_err_msg)
